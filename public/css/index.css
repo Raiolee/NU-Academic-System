@@ -1,0 +1,34 @@
+/* courses styles */
+.index {
+    display: flex;
+    justify-content: center;
+    padding: 3rem 1rem;
+}
+
+.table-container {
+    width: 100%;
+    max-width: 1000px;
+}
+
+.table-container h1 {
+    font-family: 'Atkinson Hyperlegible', sans-serif;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.icon-index {
+    margin-left: 0.8rem;
+    width: 2rem;
+    height: 2rem;
+    margin-right: 0.5rem;
+}
+
+.h1-index {
+    font-family: 'Atkinson Hyperlegible', sans-serif;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    display: flex;
+    align-items: center;
+}
