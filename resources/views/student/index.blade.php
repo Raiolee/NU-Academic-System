@@ -1,11 +1,11 @@
 <x-layout>
     <div class="index">
         <div class="table-container">
-            <h1 class="h1-index">Students <img class="icon-index" src="{{ asset('images/student.png') }}" alt="students"></h1>
+            <h1 class="heading">Students <img class="icon-index" src="{{ asset('images/student.png') }}" alt="students"></h1>
 
             @if ($students->count())
                 <div>
-                    <table>
+                    <table class="table">
                         <thead>
                             <tr>
                                 <th>Student Name</th>
@@ -27,7 +27,7 @@
                     </table>
                 </div>
             @else
-                <div>
+                <div class="no-data">
                     No departments available.
                 </div>
             @endif
