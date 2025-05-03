@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\departments;
 use Illuminate\Http\Request;
+use Ramsey\Uuid\Type\Integer;
 
 class DepartmentController extends Controller
 {
@@ -20,7 +22,7 @@ class DepartmentController extends Controller
      */
     public function create()
     {
-        //
+        return view('department.create');
     }
 
     /**
@@ -28,7 +30,20 @@ class DepartmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validate input
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'office' => 'nullable|string|max:255', // optional field
+        ]);
+
+        // Create new department
+        departments::create([
+            'name' => $request->name,
+            'office' => $request->office,
+        ]);
+
+        // Redirect back to index with success message (optional)
+        return redirect()->route('departments')->with('success', 'Department added successfully!');
     }
 
     /**
@@ -36,7 +51,8 @@ class DepartmentController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $department = departments::findOrFail($id);
+        return view('department.show', compact('department'));
     }
 
     /**
