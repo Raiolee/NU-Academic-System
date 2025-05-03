@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\departments;
+use App\Models\instructors;
 use Illuminate\Http\Request;
 
 class CourseController extends Controller
@@ -20,7 +22,10 @@ class CourseController extends Controller
      */
     public function create()
     {
-        //
+        $instructors = instructors::all();
+        $departments = departments::all();
+
+        return view('courses.create', compact('instructors', 'departments'));
     }
 
     /**
@@ -28,7 +33,16 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'instructorID' => 'required|exists:instructors,instructorID',
+            'departmentID' => 'required|exists:departments,departmentID',
+            'credit' => 'required|integer|min:1|max:6',
+        ]);
+
+        \App\Models\courses::create($request->all());
+
+        return redirect()->route('courses')->with('success', 'Course created successfully!');
     }
 
     /**
@@ -36,7 +50,8 @@ class CourseController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $course = \App\Models\courses::with(['instructor', 'department'])->findOrFail($id);
+        return view('courses.show', compact('course'));
     }
 
     /**
