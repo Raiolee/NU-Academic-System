@@ -9,4 +9,7 @@ class instructors extends Model
 {
     /** @use HasFactory<\Database\Factories\InstructorsFactory> */
     use HasFactory;
+    protected $primaryKey = 'instructorID';
+    public $incrementing = true;
+    protected $fillable = ['name', 'email'];
 }

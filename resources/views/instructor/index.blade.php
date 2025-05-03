@@ -1,9 +1,17 @@
 <x-layout>
     <div class="index">
         <div class="table-container">
-            <h1 class="heading">Instructors <img class="icon-index" src="{{ asset('images/instructors.png') }}" alt="instructors"></h1>
-
+            <h1 class="heading">Instructors <img class="icon-index" src="{{ asset('images/instructors.png') }}"
+                    alt="instructors"></h1>
+            <a href="{{ route('instructor.create') }}" class="add-button">Add Instructor</a>
             @if ($instructors->count())
+                <div>
+                    @if (session('success'))
+                        <div class="alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+                </div>
                 <div>
                     <table class="table">
                         <thead>
@@ -19,7 +27,7 @@
                                     <td>{{ $instructor->name }}</td>
                                     <td>{{ $instructor->email }}</td>
                                     <td>
-                                        <a href="{{ route('instructor.show', $instructor->id) }}">View</a>
+                                        <a href="{{ route('instructor.show', $instructor->instructorID) }}">View</a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -28,7 +36,7 @@
                 </div>
             @else
                 <div class="no-data">
-                    No departments available.
+                    No instructors available.
                 </div>
             @endif
         </div>

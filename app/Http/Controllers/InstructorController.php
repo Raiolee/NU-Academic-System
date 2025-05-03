@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\instructors;
 use Illuminate\Http\Request;
 
 class InstructorController extends Controller
@@ -20,7 +21,7 @@ class InstructorController extends Controller
      */
     public function create()
     {
-        //
+        return view('instructor.create');
     }
 
     /**
@@ -28,7 +29,20 @@ class InstructorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validate input
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'nullable|string|max:255', // optional field
+        ]);
+
+        // Create new department
+        instructors::create([
+            'name' => $request->name,
+            'email' => $request->email,
+        ]);
+
+        // Redirect back to index with success message (optional)
+        return redirect()->route('instructors')->with('success', 'Instructor added successfully!');
     }
 
     /**
@@ -36,7 +50,8 @@ class InstructorController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $instructor = instructors::findOrFail($id);
+        return view('instructor.show', compact('instructor'));
     }
 
     /**
